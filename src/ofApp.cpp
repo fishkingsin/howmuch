@@ -22,6 +22,9 @@ void ofApp::setup(){
     recognizer.setup(1,132,true,"faces");
     
     cout<<recognizer.getUniquePersonCount()<<" seperate people are in the training database"<<endl;
+    gui.setup();
+    gui.add(showGUI.set("showGui",false));
+    gui.loadFromFile("settings.xml");
 }
 
 //--------------------------------------------------------------
@@ -57,14 +60,27 @@ void ofApp::draw(){
     ofTranslate(ofGetWidth()*0.5 - grabber.getWidth()*0.5, ofGetHeight()*0.4 - grabber.getHeight()*0.5);
     grabber.draw(0, 0);
     objectFinder.draw();
-    cropped.draw(0 , grabber.getHeight());
-    if(objectFinder.size() > 0) recognizer.drawImageOfPerson(predictedPerson, 150,grabber.getHeight(), 150,150 );
+    if(showGUI)
+    {
+        cropped.draw(0 , grabber.getHeight());
+        if(objectFinder.size() > 0) recognizer.drawImageOfPerson(predictedPerson, 150,grabber.getHeight(), 150,150 );
+    }
+
     ofPopMatrix();
+    if(showGUI)gui.draw();
 }
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key) {
+        case OF_KEY_TAB:
+            showGUI = !showGUI;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------

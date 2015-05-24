@@ -7,7 +7,7 @@
 #include "ofxOpenCv.h"
 #include "ofxCv.h"
 #include "ofxFaceRecognizer.h"
-
+#include "ofxGui.h"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -35,5 +35,7 @@ class ofApp : public ofBaseApp{
     ofxFaceRecognizer recognizer;
     int predictedPerson;
 
+    ofxPanel gui;
+    ofParameter<bool> showGUI;
 		
 };
